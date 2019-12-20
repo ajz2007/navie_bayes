@@ -1,3 +1,5 @@
+# 基于伯努利模型
+
 from numpy.ma import ones, log, array
 
 
@@ -22,7 +24,7 @@ def createVocabList(dataSet):
     return list(vocabSet)
 
 
-# 词集模式, 将输入的文档转化为词向量
+# 伯努利形式使用词集模式, 将输入的文档转化为词向量
 def setOfWords2Vec(vocablist, inputSet):
     returnVec = [0] * len(vocablist)
     for word in inputSet:
@@ -33,7 +35,7 @@ def setOfWords2Vec(vocablist, inputSet):
     return returnVec
 
 
-# 词袋模式, 将输入的文档转化为词向量
+# 多项式模式使用词袋模式, 将输入的文档转化为词向量
 def bagOfWords2VecMN(vocablist, inputSet):
     returnVec = [0] * len(vocablist)
     for word in inputSet:
@@ -43,23 +45,21 @@ def bagOfWords2VecMN(vocablist, inputSet):
 
 
 def trainNB0(trainMatrix, trainCategory):
-    numTrainDocs = len(trainMatrix)
-    numWords = len(trainMatrix[0])
-    pAbusive = sum(trainCategory) / float(numTrainDocs)
+    numTrainDocs = len(trainMatrix)  # 总的训练文档数
+    numWords = len(trainMatrix[0])  # 词表的长度
+    pAbusive = sum(trainCategory) / float(numTrainDocs)  # 伯努利模型先验概率 类型为1的文档 / 总训练文档
     p0Num = ones(numWords)
     p1Num = ones(numWords)
     p0Denom = 2.0
     p1Denom = 2.0
-    for i in range(numTrainDocs):  # 伯努利形式的实现
+    for i in range(numTrainDocs):  # 伯努利模型的实现
         if trainCategory[i] == 1:
-            p1Num += trainMatrix[i]
-            # p1Denom += sum(trainMatrix[i])
-            p1Denom += sum(trainCategory) + 2
+            p1Num += trainMatrix[i]  # 统计该类别下每个单词出现过的文档数
         else:
             p0Num += trainMatrix[i]
-            # p0Denom += sum(trainMatrix[i])
-            p0Denom += sum(trainCategory) + 2
-    p1Vect = log(p1Num / p1Denom)
+    p0Denom += (numTrainDocs - sum(trainCategory))
+    p1Denom += sum(trainCategory)
+    p1Vect = log(p1Num / p1Denom)  # 伯努利模型条件概率 包含单词的文档数+1 / 类下文档总数+2
     p0Vect = log(p0Num / p0Denom)
     return p0Vect, p1Vect, pAbusive
 
@@ -81,7 +81,7 @@ def testingNB():
         trainMat.append(setOfWords2Vec(myVocabList, postinDoc))
     p0V, p1V, pAb = trainNB0(trainMat, listClasses)
 
-    testEntry = ['love', 'my', 'dalmation', 'lwd']
+    testEntry = ['love', 'my', 'dalmation']
     thisDoc = array(setOfWords2Vec(myVocabList, testEntry))
     print(testEntry, 'classified as: ', classifyNB(thisDoc, p0V, p1V, pAb))
 
