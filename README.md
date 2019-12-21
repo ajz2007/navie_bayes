@@ -25,35 +25,34 @@
 
 #### 举个例子
 编号|文档|类别(love?)
----|:--:|---:
+---|:--:|:---:
 1|I love china|yes
 2|china is beautiful|yes
 3|china china love|yes
 4|stupid china|no
-5|fuck china|no
+5|bad china|no
 ```
-词典 {I, love, china, is, beautiful, stupid, fuck} 
-测试文档  china love stupid
+词典 {I, love, china, is, beautiful, stupid, bad} 
+测试文档  china china love stupid
 ```
 * 多项式模式模型
 
 $p(yes) = \frac{9}{9+4} = \frac{9}{13}$ $p(no) = \frac{4}{9+4} = \frac{4}{13}$
 
-$p(china|yes) = \frac{4+1}{9+7} = \frac{5}{16}$
+---
+$p(china|yes) = \frac{4+1}{9+7} = \frac{5}{16}$  $p(love|yes) = \frac{2+1}{9+7} = \frac{3}{16}$
 
-$p(love|yes) = \frac{2+1}{9+7} = \frac{3}{16}$
+$p(stupid|yes) = \frac{0+1}{9+7} = \frac{1}{16}$ 
 
-$p(stupid|yes) = \frac{0+1}{9+7} = \frac{1}{16}$
-
-$p(china|no) = \frac{2+1}{4+7} = \frac{3}{11}$
-
-$p(love|no) = \frac{0+1}{4+7} = \frac{1}{11}$
+---
+$p(china|no) = \frac{2+1}{4+7} = \frac{3}{11}$ $p(love|no) = \frac{0+1}{4+7} = \frac{1}{11}$ 
 
 $p(stupid|no) = \frac{1+1}{4+7} = \frac{2}{11}$
 
-$p(yes|china love stupid) = \frac{9}{13} * \frac{5}{16} * \frac{3}{16} * \frac{1}{16} = 0.002535$
+---
+$p(yes|china love stupid) = \frac{9}{13} * \frac{5}{16}^2 * \frac{3}{16} * \frac{1}{16} = 0.0007922$
 
-$p(no|china love stupid) = \frac{4}{13} * \frac{3}{11} * \frac{1}{11} * \frac{2}{11} = 0.001387$
+$p(no|china love stupid) = \frac{4}{13} * \frac{3}{11}^2 * \frac{1}{11} * \frac{2}{11} = 0.0003782$
 
 故该文档属于yes
 
@@ -61,20 +60,19 @@ $p(no|china love stupid) = \frac{4}{13} * \frac{3}{11} * \frac{1}{11} * \frac{2}
 
 $p(yes) = \frac{3}{5}$ $p(no) = \frac{2}{5}$ 
 
-$p(china|yes) = \frac{3+1}{3+2} = \frac{4}{5}$
-
-$p(love|yes) = \frac{2+1}{3+2} = \frac{3}{5}$
+---
+$p(china|yes) = \frac{3+1}{3+2} = \frac{4}{5}$ $p(love|yes) = \frac{2+1}{3+2} = \frac{3}{5}$
 
 $p(stupid|yes) = \frac{0+1}{3+2} = \frac{1}{5}$
 
-$p(china|no) = \frac{2+1}{2+2} = \frac{3}{4}$
-
-$p(love|no) = \frac{0+1}{2+2} = \frac{1}{4}$
+---
+$p(china|no) = \frac{2+1}{2+2} = \frac{3}{4}$ $p(love|no) = \frac{0+1}{2+2} = \frac{1}{4}$
 
 $p(stupid|no) = \frac{1+1}{2+2} = \frac{2}{4}$
 
-$p(yes|china love stupid) = \frac{3}{5} * \frac{4}{5} * \frac{3}{5} * \frac{1}{5} = 0.0576$
+---
+$p(yes|china love stupid) = \frac{3}{5} * \frac{4}{5}^2 * \frac{3}{5} * \frac{1}{5} = 0.04608$
 
-$p(no|china love stupid) = \frac{2}{5} * \frac{3}{4} * \frac{1}{4} * \frac{2}{4} = 0.0375$
+$p(no|china love stupid) = \frac{2}{5} * \frac{3}{4}^2 * \frac{1}{4} * \frac{2}{4} = 0.028125$
 
 故该文档属于yes
