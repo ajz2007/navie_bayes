@@ -40,17 +40,13 @@
 
 $p(yes) = \frac{9}{9+4} = \frac{9}{13}$ &emsp; $p(no) = \frac{4}{9+4} = \frac{4}{13}$
 
-$p(china|yes) = \frac{4+1}{9+7} = \frac{5}{16}$ &emsp; $p(love|yes) = \frac{2+1}{9+7} = \frac{3}{16}$
+$p(china|yes) = \frac{4+1}{9+7} = \frac{5}{16}$ &emsp; $p(love|yes) = \frac{2+1}{9+7} = \frac{3}{16}$ &emsp; $p(stupid|yes) = \frac{0+1}{9+7} = \frac{1}{16}$ 
 
-$p(stupid|yes) = \frac{0+1}{9+7} = \frac{1}{16}$ 
+$p(china|no) = \frac{2+1}{4+7} = \frac{3}{11}$ &emsp; $p(love|no) = \frac{0+1}{4+7} = \frac{1}{11}$ &emsp; $p(stupid|no) = \frac{1+1}{4+7} = \frac{2}{11}$
 
-$p(china|no) = \frac{2+1}{4+7} = \frac{3}{11}$ &emsp; $p(love|no) = \frac{0+1}{4+7} = \frac{1}{11}$ 
+$p(yes|china &nbsp; china &nbsp; love &nbsp; stupid) = \frac{9}{13} * (\frac{5}{16})^2 * \frac{3}{16} * \frac{1}{16} = 0.0007922$
 
-$p(stupid|no) = \frac{1+1}{4+7} = \frac{2}{11}$
-
-$p(yes|china love stupid) = \frac{9}{13} * (\frac{5}{16})^2 * \frac{3}{16} * \frac{1}{16} = 0.0007922$
-
-$p(no|china love stupid) = \frac{4}{13} * (\frac{3}{11})^2 * \frac{1}{11} * \frac{2}{11} = 0.0003782$
+$p(no|china &nbsp; china &nbsp; love &nbsp; stupid) = \frac{4}{13} * (\frac{3}{11})^2 * \frac{1}{11} * \frac{2}{11} = 0.0003782$
 
 故该文档属于yes
 
@@ -67,8 +63,8 @@ $p(china|no) = \frac{2+1}{2+2} = \frac{3}{4}$ &emsp; $p(love|no) = \frac{0+1}{2+
 
 $p(stupid|no) = \frac{1+1}{2+2} = \frac{2}{4}$
 
-$p(yes|china &nbsp china &nbsp love &nbsp stupid) = \frac{3}{5} * (\frac{4}{5})^2 * \frac{3}{5} * \frac{1}{5} = 0.04608$
+$p(yes|china &nbsp; china &nbsp; love &nbsp; stupid) = \frac{3}{5} * (\frac{4}{5})^2 * \frac{3}{5} * \frac{1}{5} = 0.04608$
 
-$p(no|china &nbsp china &nbsp love &nbsp stupid) = \frac{2}{5} * (\frac{3}{4})^2 * \frac{1}{4} * \frac{2}{4} = 0.028125$
+$p(no|china &nbsp; china &nbsp; love &nbsp; stupid) = \frac{2}{5} * (\frac{3}{4})^2 * \frac{1}{4} * \frac{2}{4} = 0.028125$
 
 故该文档属于yes
