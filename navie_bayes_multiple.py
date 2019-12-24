@@ -47,6 +47,7 @@ def bagOfWords2VecMN(vocablist, inputSet):
 def trainNB0(trainMatrix, trainCategory):
     numTrainDocs = len(trainMatrix)  # 总的训练文档数
     numWords = len(trainMatrix[0])  # 词表的长度
+    pAbusive = sum(trainCategory) / float(numTrainDocs)  # 多项式模型计算先验概率 类型为1的文档 / 总训练文档
     p0Num = ones(numWords)
     p1Num = ones(numWords)
     p0Denom = 0
@@ -58,7 +59,6 @@ def trainNB0(trainMatrix, trainCategory):
         else:
             p0Num += trainMatrix[i]
             p0Denom += sum(trainMatrix[i])
-    pAbusive = p1Denom / float(p1Denom + p0Denom)  # 多项式模型计算先验概率  侮辱类别下的词总数 / 所有训练集的词总数
     p1Vect = log(p1Num / (p1Denom + numWords))  # 多项式模型计算条件概率 每个单词出现过的次数+1 / 统计该类别下单词总数+词表长度
     p0Vect = log(p0Num / (p0Denom + numWords))
     return p0Vect, p1Vect, pAbusive
